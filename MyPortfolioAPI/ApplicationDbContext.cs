@@ -12,11 +12,12 @@ namespace MyPortfolioAPI
     {
         public ApplicationDbContext([NotNullAttribute] DbContextOptions options) : base(options)
         {
-            
+
         }
 
         public DbSet<Skill> Skills { get; set; }
         public DbSet<Home> Homes { get; set; }
+        public DbSet<Experience> Experiences {get; set;}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
