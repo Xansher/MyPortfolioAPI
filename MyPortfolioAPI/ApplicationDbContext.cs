@@ -18,6 +18,7 @@ namespace MyPortfolioAPI
         public DbSet<Skill> Skills { get; set; }
         public DbSet<Home> Homes { get; set; }
         public DbSet<Experience> Experiences {get; set;}
+        public DbSet<AboutMe> AboutMe { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,7 +26,12 @@ namespace MyPortfolioAPI
 
                 new Home { Id = 1, Language = "english", Label = "Hello", Text = "I am Grzegorz Aszlar", UnderText = "Fullstack Developer" },
                 new Home { Id = 2, Language = "polish", Label = "Cześć", Text = "Nazywam się Grzegorz Aszlar", UnderText = "Fullstack Developer" }
-            }); 
+            });
+            modelBuilder.Entity<AboutMe>().HasData(new AboutMe[] {
+
+                new AboutMe { Id = 1, EnglishDescription= "Template", PolishDescription="Wzor"}
+                
+            });
         }
        
     }
