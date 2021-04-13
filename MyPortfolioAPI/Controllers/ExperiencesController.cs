@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MyPortfolioAPI.DTOs;
+using MyPortfolioAPI.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,5 +22,60 @@ namespace MyPortfolioAPI.Controllers
             this.context = context;
             this.mapper = mapper;
         }
+
+        [HttpGet]
+        public async Task<ActionResult<List<ExperienceDTO>>> Get()
+        {
+            var expList = await context.Experiences.OrderBy(x=> x.StartDate).ToListAsync();
+
+            return mapper.Map<List<ExperienceDTO>>(expList);
+        }
+
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<ExperienceDTO>> Get(int id)
+        {
+            var exp = await context.Experiences.FirstOrDefaultAsync(x=> x.Id == id);
+            if (exp == null)
+            {
+                return NotFound();
+            }
+            return mapper.Map<ExperienceDTO>(exp);
+        }
+
+
+        [HttpPost]
+        public async Task<ActionResult> Post([FromBody] ExperienceCreatingDTO experienceCreatingDTO)
+        {
+            var exp = mapper.Map<Experience>(experienceCreatingDTO);
+            context.Add(exp);
+            await context.SaveChangesAsync();
+            return NoContent();
+        }
+        
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult> Put(int id, [FromBody] ExperienceCreatingDTO experienceCreatingDTO)
+        {
+            var exp = await context.Experiences.FirstOrDefaultAsync(x => x.Id == id);
+            if (exp == null)
+            {
+                return NotFound();
+            }
+            exp = mapper.Map(experienceCreatingDTO, exp);
+            await context.SaveChangesAsync();
+            return NoContent();
+        }
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var exp = await context.Experiences.FirstOrDefaultAsync(x => x.Id == id);
+            if (exp == null)
+            {
+                return NotFound();
+            }
+            context.Remove(exp);
+            await context.SaveChangesAsync();
+            return NoContent();
+        }
+
     }
 }
