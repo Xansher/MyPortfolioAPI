@@ -17,6 +17,8 @@ namespace MyPortfolioAPI.Helpers
             CreateMap<HomeDTO, Home>().ReverseMap();
             CreateMap<HomeCreationDTO, Home>().ForMember(x => x.Image, options => options.Ignore())
                 .ForMember(x => x.Photo, options => options.Ignore());
+            CreateMap<ExperienceCreatingDTO, Experience>();
+            CreateMap<ExperienceDTO, Experience>().ReverseMap();
         }
     }
 }
