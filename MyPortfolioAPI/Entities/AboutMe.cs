@@ -11,6 +11,5 @@ namespace MyPortfolioAPI.Entities
         public string EnglishDescription { get; set; }
         public string PolishDescription { get; set; }
         public string Photo { get; set; }
-        
     }
 }
