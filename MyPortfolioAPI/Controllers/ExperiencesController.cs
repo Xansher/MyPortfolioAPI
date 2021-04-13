@@ -26,7 +26,7 @@ namespace MyPortfolioAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<List<ExperienceDTO>>> Get()
         {
-            var expList = await context.Experiences.OrderBy(x=> x.StartDate).ToListAsync();
+            var expList = await context.Experiences.OrderByDescending(x=> x.StartDate).ToListAsync();
 
             return mapper.Map<List<ExperienceDTO>>(expList);
         }
