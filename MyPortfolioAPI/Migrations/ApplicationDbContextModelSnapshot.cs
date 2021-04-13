@@ -19,6 +19,35 @@ namespace MyPortfolioAPI.Migrations
                 .HasAnnotation("ProductVersion", "5.0.4")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("MyPortfolioAPI.Entities.AboutMe", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("EnglishDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Photo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PolishDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AboutMe");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            EnglishDescription = "Template",
+                            PolishDescription = "Wzor"
+                        });
+                });
+
             modelBuilder.Entity("MyPortfolioAPI.Entities.Experience", b =>
                 {
                     b.Property<int>("Id")
