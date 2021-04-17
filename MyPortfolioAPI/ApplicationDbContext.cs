@@ -19,6 +19,8 @@ namespace MyPortfolioAPI
         public DbSet<Home> Homes { get; set; }
         public DbSet<Experience> Experiences {get; set;}
         public DbSet<AboutMe> AboutMe { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,6 +33,11 @@ namespace MyPortfolioAPI
 
                 new AboutMe { Id = 1, EnglishDescription= "Template", PolishDescription="Wzor"}
                 
+            });
+            modelBuilder.Entity<Contact>().HasData(new Contact[] {
+
+                new Contact { Id = 1, Linkedin= "", Github= "", Instagram= "", Email="" }
+
             });
         }
        

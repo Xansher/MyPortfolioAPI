@@ -48,6 +48,40 @@ namespace MyPortfolioAPI.Migrations
                         });
                 });
 
+            modelBuilder.Entity("MyPortfolioAPI.Entities.Contact", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Github")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Instagram")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Linkedin")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Contacts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "",
+                            Github = "",
+                            Instagram = "",
+                            Linkedin = ""
+                        });
+                });
+
             modelBuilder.Entity("MyPortfolioAPI.Entities.Experience", b =>
                 {
                     b.Property<int>("Id")
@@ -126,6 +160,30 @@ namespace MyPortfolioAPI.Migrations
                             Text = "Nazywam się Grzegorz Aszlar",
                             UnderText = "Fullstack Developer"
                         });
+                });
+
+            modelBuilder.Entity("MyPortfolioAPI.Entities.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MessageContent")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("MyPortfolioAPI.Entities.Skill", b =>
