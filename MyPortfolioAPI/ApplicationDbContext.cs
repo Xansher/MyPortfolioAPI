@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using MyPortfolioAPI.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MyPortfolioAPI
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
         public ApplicationDbContext([NotNullAttribute] DbContextOptions options) : base(options)
         {
@@ -39,6 +40,7 @@ namespace MyPortfolioAPI
                 new Contact { Id = 1, Linkedin= "", Github= "", Instagram= "", Email="" }
 
             });
+            base.OnModelCreating(modelBuilder);
         }
        
     }
