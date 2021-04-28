@@ -13,7 +13,8 @@ namespace MyPortfolioAPI.DTOs
         [Required(ErrorMessage = "The field with name {0} is required")]
         [StringLength(50)]
         public string Name { get; set; }
-        public string Description { get; set; }
+        public string EnglishDescription { get; set; }
+        public string PolishDescription { get; set; }
         public IFormFile Icon { get; set; }
     }
 }

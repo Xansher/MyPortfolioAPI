@@ -389,7 +389,7 @@ namespace MyPortfolioAPI.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Description")
+                    b.Property<string>("EnglishDescription")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Icon")
@@ -399,6 +399,9 @@ namespace MyPortfolioAPI.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("PolishDescription")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
