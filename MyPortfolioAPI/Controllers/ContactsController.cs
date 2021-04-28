@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyPortfolioAPI.DTOs;
@@ -28,6 +30,7 @@ namespace MyPortfolioAPI.Controllers
             var contact = await context.Contacts.FirstOrDefaultAsync(x => x.Id == 1);
             return mapper.Map<ContactDTO>(contact);
         }
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "IsAdmin")]
         [HttpPut]
         public async Task<ActionResult> Put([FromBody] ContactDTO contactDTO)
         {

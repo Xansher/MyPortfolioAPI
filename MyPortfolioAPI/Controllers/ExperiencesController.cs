@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyPortfolioAPI.DTOs;
@@ -12,6 +14,7 @@ namespace MyPortfolioAPI.Controllers
 {
     [ApiController]
     [Route("api/experiences")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "IsAdmin")]
     public class ExperiencesController : ControllerBase
     {
         private readonly ApplicationDbContext context;
@@ -23,6 +26,7 @@ namespace MyPortfolioAPI.Controllers
             this.mapper = mapper;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<List<ExperienceDTO>>> Get()
         {

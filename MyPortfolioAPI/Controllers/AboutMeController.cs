@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyPortfolioAPI.DTOs;
@@ -34,6 +36,7 @@ namespace MyPortfolioAPI.Controllers
         }
         
         [HttpPut]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "IsAdmin")]
         public async Task<ActionResult> Put([FromForm] AboutMeCreatingDTO creatingDTO)
         {
             var about = await context.AboutMe.FirstOrDefaultAsync();

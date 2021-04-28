@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyPortfolioAPI.DTOs;
@@ -13,6 +15,7 @@ namespace MyPortfolioAPI.Controllers
 {
     [Route("api/skills")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "IsAdmin")]
     public class SkillsController : ControllerBase
     {
         private readonly ApplicationDbContext context;
@@ -27,6 +30,7 @@ namespace MyPortfolioAPI.Controllers
             this.fileStorageService = fileStorageService;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<List<SkillDTO>>> Get()
         {   
