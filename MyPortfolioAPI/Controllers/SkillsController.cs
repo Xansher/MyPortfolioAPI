@@ -58,6 +58,8 @@ namespace MyPortfolioAPI.Controllers
                 skill.Icon = await fileStorageService.SaveFile(containerName, skillCreationDTO.Icon);
             }
 
+            skill.Order = await context.Skills.CountAsync(); 
+
             context.Add(skill);
             await context.SaveChangesAsync();
             return NoContent();
