@@ -34,7 +34,7 @@ namespace MyPortfolioAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<List<SkillDTO>>> Get()
         {   
-            var skills= await context.Skills.OrderBy(x => x.Name).ToListAsync();
+            var skills= await context.Skills.OrderBy(x => x.Order).ToListAsync();
             return mapper.Map<List<SkillDTO>>(skills);      
         }
 
@@ -82,6 +82,18 @@ namespace MyPortfolioAPI.Controllers
 
             await context.SaveChangesAsync();
 
+            return NoContent();
+        }
+        [HttpPut("order")]
+        public async Task<ActionResult> UpdateOrder([FromBody] List<SkillOrderDTO> skillsOrders)
+        {
+            var skills = await context.Skills.ToListAsync();
+            skillsOrders.ForEach(x =>
+            {
+                var skill= skills.FirstOrDefault(y => y.Id == x.SkillId);
+                skill.Order = x.Order;
+            });
+            await context.SaveChangesAsync();
             return NoContent();
         }
 
